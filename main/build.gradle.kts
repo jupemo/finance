@@ -1,19 +1,13 @@
 plugins {
-    id("org.jetbrains.kotlin.jvm") version "1.8.22"
-    id("org.jetbrains.kotlin.plugin.allopen") version "1.8.22"
-    id("com.google.devtools.ksp") version "1.8.22-1.0.11"
-    id("com.github.johnrengelman.shadow") version "8.1.1"
-    id("io.micronaut.application") version "4.0.4"
-    id("io.micronaut.aot") version "4.0.4"
+    id("com.github.johnrengelman.shadow")
+    id("io.micronaut.application")
+    id("io.micronaut.aot")
 }
 
 version = "0.1"
 group = "com.jupemo.finance"
 
 val kotlinVersion=project.properties.get("kotlinVersion")
-repositories {
-    mavenCentral()
-}
 
 dependencies {
     ksp("io.micronaut:micronaut-http-validation")
@@ -27,29 +21,16 @@ dependencies {
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
     testImplementation("io.micronaut:micronaut-http-client")
     runtimeOnly("org.yaml:snakeyaml")
+    annotationProcessor("io.micronaut:micronaut-inject-java")
 
+    implementation(project(":application"))
 }
 
 
 application {
     mainClass.set("com.jupemo.finance.ApplicationKt")
 }
-java {
-    sourceCompatibility = JavaVersion.toVersion("17")
-}
 
-tasks {
-    compileKotlin {
-        compilerOptions {
-            jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
-        }
-    }
-    compileTestKotlin {
-        compilerOptions {
-            jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
-        }
-    }
-}
 graalvmNative.toolchainDetection.set(false)
 micronaut {
     runtime("netty")

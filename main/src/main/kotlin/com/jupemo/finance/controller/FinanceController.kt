@@ -1,14 +1,15 @@
 package com.jupemo.finance.controller
 
+import com.jupemo.finance.application.UseCase
 import io.micronaut.http.MediaType
 import io.micronaut.http.annotation.Controller
 import io.micronaut.http.annotation.Get
 import io.micronaut.http.annotation.Produces
 
 @Controller("/hello")
-class FinanceController {
+class FinanceController (private val useCase : UseCase) {
 
     @Get
     @Produces(MediaType.TEXT_PLAIN)
-    fun index() = "HelloWorld"
+    fun index() = useCase.execute()
 }
