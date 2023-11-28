@@ -18,6 +18,7 @@ dependencies {
     runtimeOnly("org.yaml:snakeyaml")
 
     implementation(project(":infrastructure:rest"))
+    implementation(project(":infrastructure:persistence"))
 }
 
 

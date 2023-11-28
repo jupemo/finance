@@ -17,4 +17,5 @@ rootProject.name="finance"
 include("main")
 include("application")
 include("infrastructure:rest")
+include("infrastructure:persistence")
 include("domain")

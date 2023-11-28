@@ -1,6 +1,6 @@
 package com.jupemo.finance.controller
 
-import com.jupemo.finance.application.UseCase
+import com.jupemo.finance.application.port.input.UseCase
 import io.micronaut.http.MediaType
 import io.micronaut.http.annotation.Controller
 import io.micronaut.http.annotation.Get
