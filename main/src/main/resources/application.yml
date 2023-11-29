@@ -1,3 +1,13 @@
 micronaut:
   application:
     name: finance
+
+
+mongodb:
+  uri: mongodb://localhost:27017/finance?retryWrites=false
+  package-names: com.jupemo.finance.persistence.entity
+
+test-resources:
+  containers:
+    mongodb:
+      image: mongo:latest

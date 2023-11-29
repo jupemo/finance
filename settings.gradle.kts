@@ -7,7 +7,7 @@ pluginManagement {
         id("io.micronaut.application") version "4.0.4"
         id("io.micronaut.aot") version "4.0.4"
         id("io.micronaut.library") version "4.0.4"
-
+        id("io.micronaut.test-resources") version "4.0.4"
     }
 }
 
