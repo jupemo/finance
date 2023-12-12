@@ -1,7 +1,6 @@
 package com.jupemo.finance.persistence.repository
 
 import com.jupemo.finance.entity.User
-import com.jupemo.finance.persistence.entity.UserDocument
 import io.micronaut.context.annotation.Property
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest
 import jakarta.inject.Inject
@@ -12,16 +11,16 @@ import org.junit.jupiter.api.Test
 
 @MicronautTest
 @Property(name = "mongodb.package-names", value = "com.jupemo.finance.persistence.entity")
-class BankAccountServiceTest {
+class UserServiceTest {
 
     @Inject
-    lateinit var bankAccountService: UserService
+    lateinit var userService: UserService
 
     @Test
     fun `should save user`() {
         val user = User(name = "name", email = "email")
         // when
-        val userSaved = bankAccountService.saveUser(user)
+        val userSaved = userService.saveUser(user)
 
         // then
         assertNotNull(userSaved.getId())
