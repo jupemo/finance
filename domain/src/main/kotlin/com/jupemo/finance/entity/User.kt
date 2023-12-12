@@ -7,8 +7,8 @@ class User(
     private val email: String
 ) {
 
-    private lateinit var id: String
-    private lateinit var bankAccounts: List<BankAccount>
+    private var id: String? = null
+    private var bankAccounts: List<BankAccount> = emptyList()
 
     fun createBankAccount(
         name: String,
@@ -17,7 +17,8 @@ class User(
         bank: String
     ) {
         val bankAccount = BankAccount(name, currency, type, bank)
-        bankAccounts.plus(bankAccount)
+        bankAccounts = bankAccounts.plus(bankAccount)
+        println("Bank account created")
     }
 
     fun getTotalBalance(): BigDecimal {
@@ -43,6 +44,10 @@ class User(
         from.transferMoney(amount, to)
     }
 
+    fun getBankAccounts(): List<BankAccount> {
+        return this.bankAccounts
+    }
+
     fun getName(): String {
         return this.name
     }
@@ -55,8 +60,12 @@ class User(
         this.id = id
     }
 
-    fun getId(): String {
+    fun getId(): String? {
         return this.id
+    }
+
+    fun setBankAccounts(bankAccounts: List<BankAccount>) {
+        this.bankAccounts = bankAccounts
     }
 
 }

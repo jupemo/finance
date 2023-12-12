@@ -6,10 +6,9 @@ open class BankAccount (
     private val name : String,
     private val currency: String,
     private val type: BankAccountType,
-    private val bank: String
+    private val bank: String,
+    private val balance: BigDecimal = BigDecimal.ZERO
 ){
-
-    private var balance : BigDecimal = BigDecimal.ZERO
 
 
     internal fun transferMoney (amount : BigDecimal, to : BankAccount) {
@@ -25,13 +24,27 @@ open class BankAccount (
         this.balance.minus(amount)
     }
 
-    internal fun getBalance () : BigDecimal {
+    fun getBalance () : BigDecimal {
         return this.balance
     }
 
-    internal fun getType(): BankAccountType {
+    fun getType(): BankAccountType {
         return this.type
     }
+
+    fun getName(): String {
+        return this.name
+    }
+
+    fun getCurrency(): String {
+        return this.currency
+    }
+
+    fun getBank(): String {
+        return this.bank
+    }
+
+
 
 
 }
