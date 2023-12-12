@@ -15,6 +15,7 @@ dependencies {
     implementation("org.testcontainers:mongodb")
 
     implementation(project(":application"))
+    implementation(project(":domain"))
 }
 
 micronaut {

@@ -7,11 +7,8 @@ class User(
     private val email: String
 ) {
 
+    private lateinit var id: String
     private lateinit var bankAccounts: List<BankAccount>
-
-    init {
-        bankAccounts.plus(BankAccount("Checking account", "EUR", BankAccountType.CHECKING, "European Bank"))
-    }
 
     fun createBankAccount(
         name: String,
@@ -44,6 +41,22 @@ class User(
         if (from.getType() != BankAccountType.CHECKING) throw Exception("Cannot transfer from credit account")
 
         from.transferMoney(amount, to)
+    }
+
+    fun getName(): String {
+        return this.name
+    }
+
+    fun getEmail(): String {
+        return this.email
+    }
+
+    fun setId(id: String) {
+        this.id = id
+    }
+
+    fun getId(): String {
+        return this.id
     }
 
 }

@@ -1,5 +1,6 @@
 package com.jupemo.finance.persistence.repository
 
+import com.jupemo.finance.entity.User
 import com.jupemo.finance.persistence.entity.UserDocument
 import io.micronaut.context.annotation.Property
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest
@@ -18,12 +19,12 @@ class BankAccountServiceTest {
 
     @Test
     fun `should save user`() {
-        val user = UserDocument(name = "name")
+        val user = User(name = "name", email = "email")
         // when
-        val userSaved = bankAccountService.saveBankAccount(user)
+        val userSaved = bankAccountService.saveUser(user)
 
         // then
-        assertNotNull(userSaved.id)
-        assertEquals("name", userSaved.name)
+        assertNotNull(userSaved.getId())
+        assertEquals("name", userSaved.getName())
     }
 }

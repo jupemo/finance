@@ -13,4 +13,5 @@ data class UserDocument(
     @GeneratedValue
     var id : ObjectId? = null,
     var name : String,
+    var email: String,
 )

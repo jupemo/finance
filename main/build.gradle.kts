@@ -15,10 +15,18 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}")
     runtimeOnly("ch.qos.logback:logback-classic")
-    runtimeOnly("org.yaml:snakeyaml")
+    ksp("io.micronaut:micronaut-http-validation")
+    runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
 
-    implementation(project(":infrastructure:rest"))
+
+    runtimeOnly("org.yaml:snakeyaml")
+    runtimeOnly("ch.qos.logback:logback-classic")
+    testImplementation("io.micronaut:micronaut-http-client")
+    testImplementation("io.mockk:mockk")
+
     implementation(project(":infrastructure:persistence"))
+    implementation(project(":domain"))
+    implementation(project(":application"))
 }
 
 
