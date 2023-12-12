@@ -27,9 +27,9 @@ class UserServiceTest {
         val userSaved = userService.saveUser(user)
 
         // then
-        assertNotNull(userSaved.getId())
-        assertEquals("name", userSaved.getName())
-        assertEquals(1, userSaved.getBankAccounts().size)
+        assertNotNull(userSaved.id())
+        assertEquals("name", userSaved.name())
+        assertEquals(1, userSaved.bankAccounts().size)
     }
 
     @Test
@@ -40,8 +40,8 @@ class UserServiceTest {
         val userSaved = userService.saveUser(user)
 
         // then
-        assertNotNull(userSaved.getId())
-        assertEquals("name", userSaved.getName())
-        assertEquals(0, userSaved.getBankAccounts().size)
+        assertNotNull(userSaved.id())
+        assertEquals("name", userSaved.name())
+        assertEquals(0, userSaved.bankAccounts().size)
     }
 }

@@ -13,11 +13,11 @@ import java.math.BigDecimal
 class UserDocumentMapper {
     fun toUserDocument(user: User): UserDocument {
         val document = UserDocument(
-            name = user.getName(),
-            email = user.getEmail()
+            name = user.name(),
+            email = user.email()
         )
-        if (user.getId() != null) document.id = ObjectId(user.getId())
-        if (user.getBankAccounts().isNotEmpty()) document.bankAccounts = toBankAccountDocument(user)
+        if (user.id() != null) document.id = ObjectId(user.id())
+        if (user.bankAccounts().isNotEmpty()) document.bankAccounts = toBankAccountDocument(user)
 
         return document
     }
@@ -27,20 +27,20 @@ class UserDocumentMapper {
             name = userDocument.name,
             email = userDocument.email
         )
-        user.setId(userDocument.id.toString())
-        if (userDocument.bankAccounts != null) user.setBankAccounts(toBankAccount(userDocument))
+        user.id(userDocument.id.toString())
+        if (userDocument.bankAccounts != null) user.bankAccounts(toBankAccount(userDocument))
 
         return user
     }
 
     private fun toBankAccountDocument(user: User): List<BankAccountDocument> {
-        return user.getBankAccounts().map {
+        return user.bankAccounts().map {
             BankAccountDocument(
-                name = it.getName(),
-                currency = it.getCurrency(),
-                type = it.getType().toString(),
-                bank = it.getBank(),
-                balance = it.getBalance().toString()
+                name = it.name(),
+                currency = it.currency(),
+                type = it.type().toString(),
+                bank = it.bank(),
+                balance = it.balance().toString()
             )
         }
     }

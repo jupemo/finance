@@ -35,7 +35,7 @@ class CreateUserUseCaseImplTest {
         every { userSavePort.saveUser(any()) } returns User("Mock User", "email@email.com")
 
         val result = createUserUseCase.createUser(CreateUserUseCase.Command("Mock User", "email@email.com"))
-        assertEquals("Mock User", result.getName())
+        assertEquals("Mock User", result.name())
     }
 
 }

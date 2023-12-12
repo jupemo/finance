@@ -15,7 +15,7 @@ class FinanceController(private val createUserUseCase: CreateUserUseCase) {
     fun createUser(@Body user: UserDto): UserDto {
         val userCreated =
             createUserUseCase.createUser(CreateUserUseCase.Command(user.name.toString(), user.email.toString()))
-        return UserDto(userCreated.getName(), userCreated.getEmail())
+        return UserDto(userCreated.name(), userCreated.email())
     }
 
 }

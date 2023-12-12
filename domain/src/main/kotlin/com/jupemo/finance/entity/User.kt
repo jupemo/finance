@@ -21,10 +21,10 @@ class User(
         println("Bank account created")
     }
 
-    fun getTotalBalance(): BigDecimal {
+    fun totalBalance(): BigDecimal {
         val totalBalance = BigDecimal.ZERO
         bankAccounts.forEach {
-            totalBalance.plus(it.getBalance())
+            totalBalance.plus(it.balance())
         }
         return totalBalance
     }
@@ -38,33 +38,33 @@ class User(
     }
 
     fun transferMoney(amount: BigDecimal, from: BankAccount, to: BankAccount) {
-        if (from.getBalance() < amount) throw Exception("Insufficient funds")
-        if (from.getType() != BankAccountType.CHECKING) throw Exception("Cannot transfer from credit account")
+        if (from.balance() < amount) throw Exception("Insufficient funds")
+        if (from.type() != BankAccountType.CHECKING) throw Exception("Cannot transfer from credit account")
 
         from.transferMoney(amount, to)
     }
 
-    fun getBankAccounts(): List<BankAccount> {
+    fun bankAccounts(): List<BankAccount> {
         return this.bankAccounts
     }
 
-    fun getName(): String {
+    fun name(): String {
         return this.name
     }
 
-    fun getEmail(): String {
+    fun email(): String {
         return this.email
     }
 
-    fun setId(id: String) {
+    fun id(id: String) {
         this.id = id
     }
 
-    fun getId(): String? {
+    fun id(): String? {
         return this.id
     }
 
-    fun setBankAccounts(bankAccounts: List<BankAccount>) {
+    fun bankAccounts(bankAccounts: List<BankAccount>) {
         this.bankAccounts = bankAccounts
     }
 

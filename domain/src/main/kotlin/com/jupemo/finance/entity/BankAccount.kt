@@ -24,23 +24,23 @@ open class BankAccount (
         this.balance.minus(amount)
     }
 
-    fun getBalance () : BigDecimal {
+    fun balance () : BigDecimal {
         return this.balance
     }
 
-    fun getType(): BankAccountType {
+    fun type(): BankAccountType {
         return this.type
     }
 
-    fun getName(): String {
+    fun name(): String {
         return this.name
     }
 
-    fun getCurrency(): String {
+    fun currency(): String {
         return this.currency
     }
 
-    fun getBank(): String {
+    fun bank(): String {
         return this.bank
     }
 
