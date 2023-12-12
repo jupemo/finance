@@ -8,7 +8,7 @@ import io.micronaut.http.annotation.Post
 import io.micronaut.http.annotation.Produces
 
 @Controller("/")
-class FinanceController(private val createUserUseCase: CreateUserUseCase) {
+class UserController(private val createUserUseCase: CreateUserUseCase) {
 
     @Post("/user")
     @Produces(MediaType.APPLICATION_JSON)

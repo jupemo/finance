@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 @MicronautTest
-class FinanceControllerTest {
+class UserControllerTest {
 
     @Inject
     @Client("/")
@@ -22,7 +22,6 @@ class FinanceControllerTest {
 
 
     private val createUserUseCase: CreateUserUseCase = mockk<CreateUserUseCase>()
-
 
     @Test
     fun `createUser should return a UserDto with the given name and email`() {
