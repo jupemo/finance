@@ -7,28 +7,23 @@ import com.jupemo.finance.entity.User
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest
 import io.micronaut.test.annotation.MockBean
 import io.mockk.every
+import io.mockk.impl.annotations.InjectMockKs
+import io.mockk.impl.annotations.MockK
+import io.mockk.junit5.MockKExtension
 import io.mockk.mockk
 import jakarta.inject.Inject
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 
-@MicronautTest
+@ExtendWith(MockKExtension::class)
 class CreateUserUseCaseImplTest {
 
-    @Inject
+    @InjectMockKs
     lateinit var createUserUseCase: CreateUserUseCaseImpl
 
-    @Inject
+    @MockK
     lateinit var userSavePort: UserSavePort
-
-    @MockBean(UserSavePort::class)
-    fun userSavePort(): UserSavePort {
-        return mockk(relaxed = true)
-    }
-    @MockBean(TestMockClass::class)
-    fun testMockClass(): TestMockClass {
-        return mockk()
-    }
 
     @Test
     fun `createUser should return a User with the given name and email`() {
