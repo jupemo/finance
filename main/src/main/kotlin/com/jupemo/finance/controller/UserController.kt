@@ -29,7 +29,7 @@ class UserController(private val createUserUseCase: CreateUserUseCase) {
     fun error(request: HttpRequest<*>, e: Throwable): HttpResponse<JsonError> {
         val error = JsonError("Bad Things Happened: ${e.message}")
 
-        return HttpResponse.serverError<JsonError>()
+        return HttpResponse.badRequest<JsonError>()
             .body(error) // (3)
     }
 
