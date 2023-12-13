@@ -21,7 +21,6 @@ class UserControllerTest {
     @Client("/")
     lateinit var client: HttpClient
 
-
     private val createUserUseCase: CreateUserUseCase = mockk<CreateUserUseCase>()
 
     @Test
