@@ -2,14 +2,12 @@ package com.jupemo.finance.persistence.repository
 
 import com.jupemo.finance.entity.BankAccountType
 import com.jupemo.finance.entity.User
-import com.mongodb.DuplicateKeyException
 import com.mongodb.client.MongoClient
 import io.micronaut.context.annotation.Property
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest
 import jakarta.inject.Inject
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.assertThrows
 
 
 @MicronautTest
@@ -49,6 +47,7 @@ class UserServiceTest {
         assertEquals("name", userSaved.name())
         assertEquals(0, userSaved.bankAccounts().size)
     }
+
     @Test
     fun `should create unique index on email field`() {
         // Arrange
@@ -61,5 +60,24 @@ class UserServiceTest {
         // Assert
         assertNotNull(indexInfo)
         assertTrue(indexInfo?.getBoolean("unique") ?: false)
+    }
+
+    @Test
+    fun `should get existing user by email`() {
+        val user = User(name = "name", email = "email@test.com")
+        userService.saveUser(user)
+
+        val userByEmail = userService.getUserByEmail("email@test.com")
+
+        assertNotNull(userByEmail)
+        assertEquals("name", userByEmail?.name())
+        assertEquals("email@test.com", userByEmail?.email())
+    }
+
+    @Test
+    fun `should return null not found by email`() {
+        val userByEmail = userService.getUserByEmail("test@mail.com")
+
+        assertNull(userByEmail)
     }
 }

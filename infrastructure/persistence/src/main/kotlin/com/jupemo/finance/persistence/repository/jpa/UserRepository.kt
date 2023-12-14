@@ -7,4 +7,5 @@ import org.bson.types.ObjectId
 
 @MongoRepository
 interface UserRepository : CrudRepository<UserDocument, ObjectId> {
+    fun findByEmail(email: String): UserDocument?
 }
