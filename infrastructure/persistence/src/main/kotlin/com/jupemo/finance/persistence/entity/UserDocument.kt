@@ -7,7 +7,7 @@ import io.micronaut.data.annotation.MappedEntity
 import io.micronaut.data.annotation.Version
 import org.bson.types.ObjectId
 
-@MappedEntity
+@MappedEntity("user")
 @Introspected
 data class UserDocument(
     @Id
