@@ -1,5 +1,6 @@
 package com.jupemo.finance.controller
 
+import com.jupemo.finance.BaseTest
 import com.jupemo.finance.application.port.input.CreateUserUseCase
 import com.jupemo.finance.entity.User
 import io.micronaut.http.HttpRequest
@@ -15,13 +16,12 @@ import jakarta.inject.Inject
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
-@MicronautTest
-class UserControllerTest {
+@MicronautTest()
+class UserControllerSaveTest : BaseTest() {
 
     @Inject
     @Client("/")
     lateinit var client: HttpClient
-
 
     @Inject
     lateinit var createUserUseCase: CreateUserUseCase

@@ -11,3 +11,4 @@ test-resources:
   containers:
     mongodb:
       image: mongo:latest
+      db-name: finance

@@ -1,5 +1,6 @@
 package com.jupemo.finance.it
 
+import com.jupemo.finance.BaseTest
 import com.jupemo.finance.controller.UserDto
 import io.micronaut.http.HttpRequest
 import io.micronaut.http.HttpStatus
@@ -14,7 +15,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
 @MicronautTest
-class CreateUserTest {
+class CreateUserTest : BaseTest() {
 
     @Inject
     @Client("/")
