@@ -2,6 +2,8 @@ package com.jupemo.finance.controller
 
 import com.jupemo.finance.application.port.input.CreateUserUseCase
 import com.jupemo.finance.application.port.input.GetUserByEmailUseCase
+import com.jupemo.finance.dto.ErrorDto
+import com.jupemo.finance.dto.UserDto
 import io.micronaut.http.HttpRequest
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.MediaType
@@ -30,14 +32,6 @@ class UserController(
     fun getUserByEmail(@PathVariable email: String): UserDto {
         val user = getUserByEmailUseCase.getUserByEmail(email)
         return UserDto(id = user.id, name = user.name, email = user.email)
-    }
-
-    @Error(global = true)
-    fun error(request: HttpRequest<*>, e: Throwable): HttpResponse<JsonError> {
-        val error = JsonError("Bad Things Happened: ${e.message}")
-
-        return HttpResponse.badRequest<JsonError>()
-            .body(error) // (3)
     }
 
 }

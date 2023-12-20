@@ -1,4 +1,4 @@
-package com.jupemo.finance.controller
+package com.jupemo.finance.dto
 
 import io.micronaut.core.annotation.Introspected
 import io.micronaut.serde.annotation.Serdeable

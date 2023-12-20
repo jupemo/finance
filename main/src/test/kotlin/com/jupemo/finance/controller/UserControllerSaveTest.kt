@@ -2,6 +2,7 @@ package com.jupemo.finance.controller
 
 import com.jupemo.finance.BaseTest
 import com.jupemo.finance.application.port.input.CreateUserUseCase
+import com.jupemo.finance.dto.UserDto
 import com.jupemo.finance.entity.User
 import io.micronaut.http.HttpRequest
 import io.micronaut.http.HttpStatus
@@ -16,7 +17,7 @@ import jakarta.inject.Inject
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
-@MicronautTest()
+@MicronautTest
 class UserControllerSaveTest : BaseTest() {
 
     @Inject

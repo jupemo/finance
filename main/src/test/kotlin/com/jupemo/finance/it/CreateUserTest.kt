@@ -1,7 +1,7 @@
 package com.jupemo.finance.it
 
 import com.jupemo.finance.BaseTest
-import com.jupemo.finance.controller.UserDto
+import com.jupemo.finance.dto.UserDto
 import io.micronaut.http.HttpRequest
 import io.micronaut.http.HttpStatus
 import io.micronaut.http.client.HttpClient

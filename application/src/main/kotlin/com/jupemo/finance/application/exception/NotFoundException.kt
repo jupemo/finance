@@ -1,4 +1,6 @@
 package com.jupemo.finance.application.exception
 
-class NotFounException {
+import java.lang.Exception
+
+class NotFoundException(override val message: String) : Exception() {
 }

@@ -2,6 +2,8 @@ package com.jupemo.finance.controller
 
 import com.jupemo.finance.BaseTest
 import com.jupemo.finance.application.port.input.GetUserByEmailUseCase
+import com.jupemo.finance.dto.ErrorDto
+import com.jupemo.finance.dto.UserDto
 import io.micronaut.http.HttpRequest
 import io.micronaut.http.client.HttpClient
 import io.micronaut.http.client.annotation.Client

@@ -1,5 +1,6 @@
 package com.jupemo.finance.application.port.input.interceptor
 
+import com.jupemo.finance.application.exception.NotFoundException
 import com.jupemo.finance.application.port.output.GetUserByEmailPort
 import com.jupemo.finance.entity.User
 import io.mockk.every
@@ -39,13 +40,13 @@ class GetUserByEmailUseCaseImplTest {
     }
 
     @Test
-    fun `getUserByEmail should throw IllegalArgumentException when user is not found`() {
+    fun `getUserByEmail should throw Not Found Exception when user is not found`() {
         every { getUserPort.getUserByEmail(any()) } returns null
 
         try {
-            getUserByEmailUseCase.getUserByEmail("email")
-        } catch (e: IllegalArgumentException) {
-            assert(e.message == "User not found")
+            getUserByEmailUseCase.getUserByEmail("email@notfound.com")
+        } catch (e: NotFoundException) {
+            assertEquals("User with email 'email@notfound.com' not found.", e.message)
         }
     }
 }
