@@ -5,7 +5,8 @@ import java.math.BigDecimal
 class User(
     private val name: String,
     private val email: String,
-    private var id: String? = null
+    private var id: String? = null,
+    private var version: Int? = null
 ) {
 
     private var bankAccounts: List<BankAccount> = emptyList()
@@ -69,4 +70,11 @@ class User(
         this.bankAccounts = bankAccounts
     }
 
+    fun version(): Int? {
+        return this.version
+    }
+
+    fun version(version: Int?) {
+        this.version = version
+    }
 }

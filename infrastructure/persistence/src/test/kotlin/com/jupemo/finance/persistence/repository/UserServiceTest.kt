@@ -81,4 +81,22 @@ class UserServiceTest {
 
         assertNull(userByEmail)
     }
+
+    @Test
+    fun `should update existing user`() {
+        // Given
+        val existingUser = User(name = "existing", email = "existing@test.com")
+        val savedUser = userService.saveUser(existingUser)
+        val updatedUser =
+            User(id = savedUser.id(), name = "updated", email = "existing@test.com", version = savedUser.version())
+
+        // When
+        val result = userService.updateUser(updatedUser)
+
+        // Then
+        assertNotNull(result)
+        assertEquals("updated", result.name())
+        assertEquals("existing@test.com", result.email())
+    }
+
 }

@@ -18,6 +18,7 @@ class UserDocumentMapper {
         )
         if (user.id() != null) document.id = ObjectId(user.id())
         if (user.bankAccounts().isNotEmpty()) document.bankAccounts = toBankAccountDocument(user)
+        if (user.version() != null) document.version = user.version()
 
         return document
     }
@@ -28,6 +29,7 @@ class UserDocumentMapper {
             email = userDocument.email
         )
         user.id(userDocument.id.toString())
+        user.version(userDocument.version)
         if (userDocument.bankAccounts != null) user.bankAccounts(toBankAccount(userDocument))
 
         return user
