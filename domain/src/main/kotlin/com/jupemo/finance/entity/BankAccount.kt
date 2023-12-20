@@ -2,29 +2,30 @@ package com.jupemo.finance.entity
 
 import java.math.BigDecimal
 
-open class BankAccount (
-    private val name : String,
+open class BankAccount(
+    private val id: String,
+    private val name: String,
     private val currency: String,
     private val type: BankAccountType,
     private val bank: String,
     private val balance: BigDecimal = BigDecimal.ZERO
-){
+) {
 
 
-    internal fun transferMoney (amount : BigDecimal, to : BankAccount) {
+    internal fun transferMoney(amount: BigDecimal, to: BankAccount) {
         withdrawMoney(amount)
         depositMoney(amount)
     }
 
-    internal fun depositMoney (amount : BigDecimal) {
+    internal fun depositMoney(amount: BigDecimal) {
         this.balance.plus(amount)
     }
 
-    internal fun withdrawMoney (amount : BigDecimal) {
+    internal fun withdrawMoney(amount: BigDecimal) {
         this.balance.minus(amount)
     }
 
-    fun balance () : BigDecimal {
+    fun balance(): BigDecimal {
         return this.balance
     }
 
@@ -44,7 +45,9 @@ open class BankAccount (
         return this.bank
     }
 
-
+    fun id(): String {
+        return this.id
+    }
 
 
 }

@@ -7,6 +7,7 @@ import io.micronaut.serde.annotation.Serdeable
 @Serdeable.Deserializable
 @Serdeable.Serializable
 data class BankAccountDocument(
+    val id: String,
     val name: String,
     val currency: String,
     val type: String,

@@ -8,6 +8,7 @@ import io.micronaut.test.extensions.junit5.annotation.MicronautTest
 import jakarta.inject.Inject
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
+import java.util.*
 
 
 @MicronautTest
@@ -24,7 +25,7 @@ class UserServiceTest {
     fun `should save user and bank account`() {
 
         val user = User(name = "name", email = "email")
-        user.createBankAccount("name", "currency", BankAccountType.CHECKING, "bank")
+        user.createBankAccount(UUID.randomUUID().toString(), "name", "currency", BankAccountType.CHECKING, "bank")
 
         // when
         val userSaved = userService.saveUser(user)

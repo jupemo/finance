@@ -11,14 +11,15 @@ class User(
     private var bankAccounts: List<BankAccount> = emptyList()
 
     fun createBankAccount(
+        id: String,
         name: String,
         currency: String,
         type: BankAccountType,
         bank: String
-    ) {
-        val bankAccount = BankAccount(name, currency, type, bank)
+    ) : BankAccount {
+        val bankAccount = BankAccount(id, name, currency, type, bank)
         bankAccounts = bankAccounts.plus(bankAccount)
-        println("Bank account created")
+        return bankAccount
     }
 
     fun totalBalance(): BigDecimal {

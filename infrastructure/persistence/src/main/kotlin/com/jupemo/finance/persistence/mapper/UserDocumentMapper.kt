@@ -36,6 +36,7 @@ class UserDocumentMapper {
     private fun toBankAccountDocument(user: User): List<BankAccountDocument> {
         return user.bankAccounts().map {
             BankAccountDocument(
+                id = it.id(),
                 name = it.name(),
                 currency = it.currency(),
                 type = it.type().toString(),
@@ -48,6 +49,7 @@ class UserDocumentMapper {
     private fun toBankAccount(userDocument: UserDocument): List<BankAccount> {
         return userDocument.bankAccounts!!.map {
             BankAccount(
+                id = it.id,
                 name = it.name,
                 currency = it.currency,
                 type = BankAccountType.valueOf(it.type),
