@@ -71,4 +71,18 @@ class CreateBankAccountTest : BaseTest() {
     }
 
 
+    @Test
+    fun `createBankAccount should return 400 status when bank account type is invalid`() {
+        val bankAccountDto =
+            BankAccountDto(name = "Test blank", currency = "USD", type = BankAccountType.CHECKING, bank = "")
+        val nonExistingUserId = ObjectId().toString()
+
+        val request = HttpRequest.POST("/user/$nonExistingUserId/bank-account", bankAccountDto)
+        try {
+            client.toBlocking().exchange(request, ErrorDto::class.java)
+        } catch (e: HttpClientResponseException) {
+            assertEquals(HttpStatus.BAD_REQUEST, e.status)
+        }
+    }
+
 }
