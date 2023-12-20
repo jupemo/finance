@@ -1,0 +1,127 @@
+openapi: 3.0.1
+info:
+  title: User API
+  version: 1.0.0
+paths:
+  /user:
+    post:
+      description: Create user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: user-schema.yml
+      responses:
+        201:
+          description: created
+          content:
+            application/json:
+              schema:
+                $ref: user-schema.yml
+        409:
+          description: conflict
+          content:
+            application/json:
+              schema:
+                $ref: error-schema.yml
+  /user/{email}:
+    get:
+      description: Get user by email
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: user-schema.yml
+        404:
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: error-schema.yml
+  /user/{id}:
+    get:
+      description: Get user by id
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: user-complete-schema.yml
+  /user/{id}/bank-account:
+    get:
+      description: Get user bank accounts
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: bank-account-schema.yml
+    post:
+      description: Create bank account
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: bank-account-schema.yml
+      responses:
+        201:
+          description: created
+          content:
+            application/json:
+              schema:
+                $ref: bank-account-schema.yml
+  /user/{id}/bank-account/{id}/deposit:
+    post:
+      description: Deposit money
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                quantity:
+                  type: number
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  total:
+                    type: number
+  /user/{id}/bank-account/{id}/withdraw:
+    post:
+      description: Withdrew money
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                quantity:
+                  type: number
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                properties:
+                  quantity:
+                    type: number
+  /user/{id}/bank-account/{id}/transfer-money:
+    post:
+      description: transfer money to internal bank account
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: transfer-money-schema.yml
+      responses:
+        204:
+          description: no content

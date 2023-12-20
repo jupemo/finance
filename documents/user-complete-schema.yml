@@ -1,0 +1,10 @@
+title: User complete information
+type: object
+properties:
+  user:
+    $ref: user-schema.yml
+  bankAccount:
+    type: array
+    items:
+      $ref: bank-account-schema.yml
+

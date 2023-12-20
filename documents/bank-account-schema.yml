@@ -1,0 +1,26 @@
+title: bank account
+type: object
+properties:
+  id:
+    type: string
+    readOnly: true
+  name:
+    type: string
+  currency:
+    type: string
+  bank_account_type:
+    type: string
+    enum:
+      - SAVINGS
+      - CHECKING
+      - CREDIT
+  bank:
+    readOnly: true
+    type: string
+  balance:
+    readOnly: true
+    type: number
+required:
+  - name
+  - bank_account_type
+  - currency

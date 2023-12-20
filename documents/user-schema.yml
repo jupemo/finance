@@ -1,0 +1,13 @@
+title: user simple
+type: object
+properties:
+  id:
+    type: string
+    readOnly: true
+  name:
+    type: string
+  email:
+    type: string
+required:
+  - name
+  - email
