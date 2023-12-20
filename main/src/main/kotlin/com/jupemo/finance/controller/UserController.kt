@@ -1,14 +1,14 @@
 package com.jupemo.finance.controller
 
+import com.jupemo.finance.application.port.input.CreateBankAccountUseCase
 import com.jupemo.finance.application.port.input.CreateUserUseCase
 import com.jupemo.finance.application.port.input.GetUserByEmailUseCase
-import com.jupemo.finance.dto.ErrorDto
+import com.jupemo.finance.dto.BankAccountDto
 import com.jupemo.finance.dto.UserDto
-import io.micronaut.http.HttpRequest
+import com.jupemo.finance.entity.BankAccountType
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.MediaType
 import io.micronaut.http.annotation.*
-import io.micronaut.http.hateoas.JsonError
 import io.micronaut.validation.Validated
 import jakarta.validation.Valid
 
@@ -16,7 +16,8 @@ import jakarta.validation.Valid
 @Controller("/")
 class UserController(
     private val createUserUseCase: CreateUserUseCase,
-    private val getUserByEmailUseCase: GetUserByEmailUseCase
+    private val getUserByEmailUseCase: GetUserByEmailUseCase,
+    private val createBankAccountUseCase: CreateBankAccountUseCase
 ) {
 
     @Post("/user")
@@ -34,4 +35,24 @@ class UserController(
         return UserDto(id = user.id, name = user.name, email = user.email)
     }
 
+    @Post("/user/{id}/bank-account")
+    @Produces(MediaType.APPLICATION_JSON)
+    fun createBankAccount(@PathVariable id: String, @Body @Valid bankAccountDto: BankAccountDto): BankAccountDto {
+        val bankAccountCreated = createBankAccountUseCase.createBankAccount(
+            CreateBankAccountUseCase.Command(
+                userId = id,
+                name = bankAccountDto.name,
+                currency = bankAccountDto.currency,
+                type = bankAccountDto.type.name,
+                bank = bankAccountDto.bank
+            )
+        )
+        return BankAccountDto(
+            id = bankAccountCreated.id,
+            name = bankAccountCreated.name,
+            currency = bankAccountCreated.currency,
+            type = BankAccountType.valueOf(bankAccountCreated.type),
+            bank = bankAccountCreated.bank
+        )
+    }
 }

@@ -29,7 +29,8 @@ class CreateBankAccountUseCaseImpl(
             bankAccount.id(),
             bankAccount.name(),
             bankAccount.type().toString(),
-            bankAccount.bank()
+            bankAccount.bank(),
+            bankAccount.currency()
         )
     }
 }

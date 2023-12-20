@@ -23,7 +23,8 @@ interface CreateBankAccountUseCase {
         val id: String,
         val name: String,
         val type: String,
-        val bank: String
+        val bank: String,
+        val currency: String,
     )
 
 }
