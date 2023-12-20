@@ -6,6 +6,7 @@ import com.mongodb.client.MongoClient
 import io.micronaut.context.annotation.Property
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest
 import jakarta.inject.Inject
+import org.bson.types.ObjectId
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import java.util.*
@@ -99,4 +100,26 @@ class UserServiceTest {
         assertEquals("existing@test.com", result.email())
     }
 
+
+    @Test
+    fun `should return user when id exists`() {
+        val existingUser = User(name = "existing", email = "existing@test.com")
+        val savedUser = userService.saveUser(existingUser)
+
+        val result = userService.getUserById(savedUser.id()!!)
+
+        assertNotNull(result!!)
+        assertEquals(savedUser.id(), result.id())
+        assertEquals("existing", result.name())
+        assertEquals("existing@test.com", result.email())
+    }
+
+    @Test
+    fun `should return null when id does not exist`() {
+        val nonExistingUserId = ObjectId().toString()
+
+        val result = userService.getUserById(nonExistingUserId)
+
+        assertNull(result)
+    }
 }
