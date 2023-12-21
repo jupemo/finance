@@ -1,15 +1,14 @@
 package com.jupemo.finance.application.port.input.interceptor
 
 import com.jupemo.finance.application.exception.NotFoundException
-import com.jupemo.finance.application.port.output.GetUserByEmailPort
+import com.jupemo.finance.application.port.output.UserGetByEmailPort
 import com.jupemo.finance.entity.User
 import io.mockk.every
 import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.MockK
 import io.mockk.junit5.MockKExtension
 import io.mockk.verify
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertNotNull
+import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import java.util.*
@@ -21,7 +20,7 @@ class GetUserByEmailUseCaseImplTest {
     lateinit var getUserByEmailUseCase: GetUserByEmailUseCaseImpl
 
     @MockK
-    lateinit var getUserPort: GetUserByEmailPort
+    lateinit var getUserPort: UserGetByEmailPort
 
     @Test
     fun `getUserByEmail should return a User with the given email`() {
@@ -43,10 +42,11 @@ class GetUserByEmailUseCaseImplTest {
     fun `getUserByEmail should throw Not Found Exception when user is not found`() {
         every { getUserPort.getUserByEmail(any()) } returns null
 
-        try {
+        val result = assertThrows(NotFoundException::class.java) {
             getUserByEmailUseCase.getUserByEmail("email@notfound.com")
-        } catch (e: NotFoundException) {
-            assertEquals("User with email 'email@notfound.com' not found.", e.message)
         }
+
+        assertEquals("User with email 'email@notfound.com' not found.", result.message)
+
     }
 }

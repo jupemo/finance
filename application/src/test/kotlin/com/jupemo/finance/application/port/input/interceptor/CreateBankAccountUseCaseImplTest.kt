@@ -2,7 +2,7 @@ package com.jupemo.finance.application.port.input.interceptor
 
 import com.jupemo.finance.application.exception.NotFoundException
 import com.jupemo.finance.application.port.input.CreateBankAccountUseCase
-import com.jupemo.finance.application.port.output.UserGetPort
+import com.jupemo.finance.application.port.output.UserGetByIdPort
 import com.jupemo.finance.application.port.output.UserUpdatePort
 import com.jupemo.finance.entity.User
 import io.mockk.every
@@ -22,7 +22,7 @@ class CreateBankAccountUseCaseImplTest {
     lateinit var createBankAccountUseCase: CreateBankAccountUseCaseImpl
 
     @MockK
-    lateinit var userGetPort: UserGetPort
+    lateinit var userGetPort: UserGetByIdPort
 
     @MockK(relaxed = true)
     lateinit var userUpdatePort: UserUpdatePort

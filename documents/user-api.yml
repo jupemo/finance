@@ -40,7 +40,7 @@ paths:
             application/json:
               schema:
                 $ref: error-schema.yml
-  /user/{id}:
+  /user/{id}/info:
     get:
       description: Get user by id
       responses:

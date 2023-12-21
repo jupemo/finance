@@ -1,7 +1,7 @@
 package com.jupemo.finance.persistence.repository
 
-import com.jupemo.finance.application.port.output.GetUserByEmailPort
-import com.jupemo.finance.application.port.output.UserGetPort
+import com.jupemo.finance.application.port.output.UserGetByEmailPort
+import com.jupemo.finance.application.port.output.UserGetByIdPort
 import com.jupemo.finance.application.port.output.UserSavePort
 import com.jupemo.finance.application.port.output.UserUpdatePort
 import com.jupemo.finance.entity.User
@@ -20,7 +20,7 @@ class UserService(
     private val repository: UserRepository,
     private val userDocumentMapper: UserDocumentMapper,
     private val mongoClient: MongoClient
-) : UserSavePort, GetUserByEmailPort, UserUpdatePort, UserGetPort {
+) : UserSavePort, UserGetByEmailPort, UserUpdatePort, UserGetByIdPort {
 
     @PostConstruct
     fun createIndex() {

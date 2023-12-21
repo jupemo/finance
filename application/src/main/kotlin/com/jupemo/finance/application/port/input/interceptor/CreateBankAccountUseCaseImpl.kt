@@ -2,7 +2,7 @@ package com.jupemo.finance.application.port.input.interceptor
 
 import com.jupemo.finance.application.exception.NotFoundException
 import com.jupemo.finance.application.port.input.CreateBankAccountUseCase
-import com.jupemo.finance.application.port.output.UserGetPort
+import com.jupemo.finance.application.port.output.UserGetByIdPort
 import com.jupemo.finance.application.port.output.UserUpdatePort
 import com.jupemo.finance.entity.BankAccountType
 import jakarta.inject.Singleton
@@ -10,7 +10,7 @@ import java.util.*
 
 @Singleton
 class CreateBankAccountUseCaseImpl(
-    private val userGetPort: UserGetPort,
+    private val userGetPort: UserGetByIdPort,
     private val userUpdatePort: UserUpdatePort
 ) : CreateBankAccountUseCase {
     override fun createBankAccount(command: CreateBankAccountUseCase.Command): CreateBankAccountUseCase.Return {
