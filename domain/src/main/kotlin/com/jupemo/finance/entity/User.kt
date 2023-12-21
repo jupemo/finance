@@ -17,7 +17,7 @@ class User(
         currency: String,
         type: BankAccountType,
         bank: String
-    ) : BankAccount {
+    ): BankAccount {
         val bankAccount = BankAccount(id, name, currency, type, bank)
         bankAccounts = bankAccounts.plus(bankAccount)
         return bankAccount

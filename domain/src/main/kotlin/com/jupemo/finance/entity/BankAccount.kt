@@ -2,7 +2,7 @@ package com.jupemo.finance.entity
 
 import java.math.BigDecimal
 
-open class BankAccount(
+class BankAccount(
     private val id: String,
     private val name: String,
     private val currency: String,

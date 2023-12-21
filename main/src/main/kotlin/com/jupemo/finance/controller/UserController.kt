@@ -3,10 +3,12 @@ package com.jupemo.finance.controller
 import com.jupemo.finance.application.port.input.CreateBankAccountUseCase
 import com.jupemo.finance.application.port.input.CreateUserUseCase
 import com.jupemo.finance.application.port.input.GetUserByEmailUseCase
+import com.jupemo.finance.application.port.input.GetUserByIdUseCase
 import com.jupemo.finance.dto.BankAccountDto
 import com.jupemo.finance.dto.UserDto
+import com.jupemo.finance.dto.UserInfoDto
 import com.jupemo.finance.entity.BankAccountType
-import io.micronaut.http.HttpResponse
+import com.jupemo.finance.mapper.UserMapper
 import io.micronaut.http.MediaType
 import io.micronaut.http.annotation.*
 import io.micronaut.validation.Validated
@@ -17,7 +19,9 @@ import jakarta.validation.Valid
 class UserController(
     private val createUserUseCase: CreateUserUseCase,
     private val getUserByEmailUseCase: GetUserByEmailUseCase,
-    private val createBankAccountUseCase: CreateBankAccountUseCase
+    private val createBankAccountUseCase: CreateBankAccountUseCase,
+    private val getUserByIdUseCase: GetUserByIdUseCase,
+    private val userMapper: UserMapper
 ) {
 
     @Post("/user")
@@ -54,5 +58,11 @@ class UserController(
             type = BankAccountType.valueOf(bankAccountCreated.type),
             bank = bankAccountCreated.bank
         )
+    }
+
+    @Get("/user/{id}/info")
+    @Produces(MediaType.APPLICATION_JSON)
+    fun getUserById(@PathVariable id: String): UserInfoDto {
+        return userMapper.userToDto(getUserByIdUseCase.getUserById(id))
     }
 }
