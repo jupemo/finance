@@ -39,8 +39,12 @@ class User(
         }
     }
 
-    fun withdrawMoney(amount: BigDecimal, bankAccount: BankAccount) {
-        bankAccount.withdrawMoney(amount)
+    fun withdrawMoney(amount: BigDecimal, bankAccountI: String) {
+        this.bankAccounts.forEach {
+            if (it.id() == bankAccountI) {
+                it.withdrawMoney(amount)
+            }
+        }
     }
 
     fun transferMoney(amount: BigDecimal, from: BankAccount, to: BankAccount) {

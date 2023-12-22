@@ -8,7 +8,7 @@ class BankAccount(
     private val currency: String,
     private val type: BankAccountType,
     private val bank: String,
-    private val balance: BigDecimal = BigDecimal.ZERO
+    private var balance: BigDecimal = BigDecimal.ZERO
 ) {
 
 
@@ -18,11 +18,11 @@ class BankAccount(
     }
 
     internal fun depositMoney(amount: BigDecimal) {
-        this.balance.plus(amount)
+        this.balance = this.balance.plus(amount)
     }
 
     internal fun withdrawMoney(amount: BigDecimal) {
-        this.balance.minus(amount)
+        this.balance = this.balance.minus(amount)
     }
 
     fun balance(): BigDecimal {
