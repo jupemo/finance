@@ -31,8 +31,12 @@ class User(
         return totalBalance
     }
 
-    fun depositMoney(amount: BigDecimal, bankAccount: BankAccount) {
-        bankAccount.depositMoney(amount)
+    fun depositMoney(amount: BigDecimal, bankAccountI: String) {
+        this.bankAccounts.forEach {
+            if (it.id() == bankAccountI) {
+                it.depositMoney(amount)
+            }
+        }
     }
 
     fun withdrawMoney(amount: BigDecimal, bankAccount: BankAccount) {
