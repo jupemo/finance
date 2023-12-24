@@ -87,14 +87,8 @@ paths:
                 quantity:
                   type: number
       responses:
-        200:
-          description: OK
-          content:
-            application/json:
-              schema:
-                properties:
-                  total:
-                    type: number
+        204:
+          description: no content
   /user/{id}/bank-account/{id}/withdraw:
     post:
       description: Withdrew money
