@@ -4,6 +4,7 @@ plugins {
 
 dependencies {
     implementation(project(":domain"))
+    implementation("io.mockk:mockk")
 }
 
 version = "0.1"

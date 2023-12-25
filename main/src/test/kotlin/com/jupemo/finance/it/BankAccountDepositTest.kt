@@ -74,4 +74,24 @@ class BankAccountDepositTest : BaseTest() {
         assertEquals("100.0", db[0]["balance"])
 
     }
+
+    @Test
+    fun `deposit should return 400 when amount is NaN`() {
+        val request = HttpRequest.POST("/user/${userId}/bank-account/${bankId}/deposit", AmountDto("NaN"))
+        val exception = assertThrows<HttpClientResponseException> {
+            client.toBlocking().exchange(request, ErrorDto::class.java)
+        }
+        assertEquals(HttpStatus.BAD_REQUEST, exception.status)
+        assertEquals("Amount must be a valid number", exception.message)
+    }
+
+    @Test
+    fun `deposit should return 400 when amount is negative`() {
+        val request = HttpRequest.POST("/user/${userId}/bank-account/${bankId}/deposit", AmountDto("-100.0"))
+        val exception = assertThrows<HttpClientResponseException> {
+            client.toBlocking().exchange(request, ErrorDto::class.java)
+        }
+        assertEquals(HttpStatus.BAD_REQUEST, exception.status)
+        assertEquals("Amount must be greater than zero", exception.message)
+    }
 }
