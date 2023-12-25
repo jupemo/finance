@@ -1,6 +1,6 @@
 package com.jupemo.finance.application.port.input.interceptor
 
-import com.jupemo.finance.application.exception.NotFoundException
+import com.jupemo.finance.application.exception.UserNotFoundException
 import com.jupemo.finance.application.port.input.WithdrawUseCase
 import com.jupemo.finance.application.port.output.UserGetByIdPort
 import com.jupemo.finance.application.port.output.UserUpdatePort
@@ -54,9 +54,9 @@ class WithdrawUseCaseImplTest {
         every { userGetByIdPort.getUserById(command.userId) } returns null
 
         // when
-        val error = assertThrows(NotFoundException::class.java) { withdrawUseCaseImpl.withdraw(command) }
+        val error = assertThrows(UserNotFoundException::class.java) { withdrawUseCaseImpl.withdraw(command) }
         // then
-        assertEquals(NotFoundException::class, error::class)
+        assertEquals(UserNotFoundException::class, error::class)
         verify { userGetByIdPort.getUserById(command.userId) }
         verify(exactly = 0) { user.withdrawMoney(any(), any()) }
         verify(exactly = 0) { userUpdatePort.updateUser(user) }

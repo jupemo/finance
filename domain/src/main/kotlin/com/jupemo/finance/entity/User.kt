@@ -1,5 +1,6 @@
 package com.jupemo.finance.entity
 
+import com.jupemo.finance.exception.BankAccountNotFoundException
 import java.math.BigDecimal
 
 class User(
@@ -31,20 +32,16 @@ class User(
         return totalBalance
     }
 
-    fun depositMoney(amount: BigDecimal, bankAccountI: String) {
-        this.bankAccounts.forEach {
-            if (it.id() == bankAccountI) {
-                it.depositMoney(amount)
-            }
-        }
+    fun depositMoney(amount: BigDecimal, bankAccountId: String) {
+        this.bankAccounts.stream().filter { it.id() == bankAccountId }.findFirst()
+            .orElseThrow { BankAccountNotFoundException(bankAccountId) }
+            .depositMoney(amount)
     }
 
-    fun withdrawMoney(amount: BigDecimal, bankAccountI: String) {
-        this.bankAccounts.forEach {
-            if (it.id() == bankAccountI) {
-                it.withdrawMoney(amount)
-            }
-        }
+    fun withdrawMoney(amount: BigDecimal, bankAccountId: String) {
+        this.bankAccounts.stream().filter { it.id() == bankAccountId }.findFirst()
+            .orElseThrow { BankAccountNotFoundException(bankAccountId) }
+            .withdrawMoney(amount)
     }
 
     fun transferMoney(amount: BigDecimal, from: BankAccount, to: BankAccount) {

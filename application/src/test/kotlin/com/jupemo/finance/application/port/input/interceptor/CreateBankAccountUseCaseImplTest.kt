@@ -1,6 +1,6 @@
 package com.jupemo.finance.application.port.input.interceptor
 
-import com.jupemo.finance.application.exception.NotFoundException
+import com.jupemo.finance.application.exception.UserNotFoundException
 import com.jupemo.finance.application.port.input.CreateBankAccountUseCase
 import com.jupemo.finance.application.port.output.UserGetByIdPort
 import com.jupemo.finance.application.port.output.UserUpdatePort
@@ -87,7 +87,7 @@ class CreateBankAccountUseCaseImplTest {
         every { userGetPort.getUserById(any()) } returns null
 
         // When
-        val exception = assertThrows(NotFoundException::class.java) {
+        val exception = assertThrows(UserNotFoundException::class.java) {
             createBankAccountUseCase.createBankAccount(command)
         }
 

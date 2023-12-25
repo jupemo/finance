@@ -1,7 +1,9 @@
 package com.jupemo.finance.entity
 
+import com.jupemo.finance.exception.BankAccountNotFoundException
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import java.math.BigDecimal
 
 class UserTest {
@@ -57,7 +59,8 @@ class UserTest {
         assertEquals(BigDecimal("100"), bankAccount.balance())
     }
 
-    fun `should withraw in bankAccount`() {
+    @Test
+    fun `should withdraw in bankAccount`() {
         // given
         val name = "name"
         val email = "email"
@@ -73,5 +76,31 @@ class UserTest {
         user.withdrawMoney(BigDecimal("50"), bankAccount.id())
         // then
         assertEquals(BigDecimal("50"), bankAccount.balance())
+    }
+
+    @Test
+    fun `should return BankAccountNotFound in withdraw`() {
+        // given
+        val name = "name"
+        val email = "email"
+        val user = User(name, email)
+        // when
+        val exception = assertThrows<BankAccountNotFoundException> { user.depositMoney(BigDecimal("100"), "id") }
+        // then
+        assertEquals("Bank account with id id not found", exception.message)
+        assertEquals(BankAccountNotFoundException::class.java, exception.javaClass)
+    }
+
+    @Test
+    fun `should return BankAccountNotFound in deposit`() {
+        //given
+        val name = "name"
+        val email = "email"
+        val user = User(name, email)
+        // when
+        val exception = assertThrows<BankAccountNotFoundException> { user.depositMoney(BigDecimal("100"), "id") }
+        // then
+        assertEquals("Bank account with id id not found", exception.message)
+        assertEquals(BankAccountNotFoundException::class.java, exception.javaClass)
     }
 }

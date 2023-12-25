@@ -1,6 +1,6 @@
 package com.jupemo.finance.application.port.input.interceptor
 
-import com.jupemo.finance.application.exception.NotFoundException
+import com.jupemo.finance.application.exception.UserNotFoundException
 import com.jupemo.finance.application.port.input.DepositUseCase
 import com.jupemo.finance.application.port.output.UserGetByIdPort
 import com.jupemo.finance.application.port.output.UserUpdatePort
@@ -55,7 +55,7 @@ class DepositUseCaseImplTest {
         )
         every { userGetByIdPort.getUserById(any()) } returns null
         // when
-        val exception = assertThrows(NotFoundException::class.java) {
+        val exception = assertThrows(UserNotFoundException::class.java) {
             depositUseCaseImpl.deposit(command)
         }
         // then
