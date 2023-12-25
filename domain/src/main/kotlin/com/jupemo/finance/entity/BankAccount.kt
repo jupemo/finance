@@ -1,5 +1,7 @@
 package com.jupemo.finance.entity
 
+import com.jupemo.finance.exception.InsufficientFundsException
+import com.jupemo.finance.exception.NegativeNumberException
 import java.math.BigDecimal
 
 class BankAccount(
@@ -18,10 +20,13 @@ class BankAccount(
     }
 
     internal fun depositMoney(amount: BigDecimal) {
+        if (amount < BigDecimal.ZERO) throw NegativeNumberException()
         this.balance = this.balance.plus(amount)
     }
 
     internal fun withdrawMoney(amount: BigDecimal) {
+        if (amount < BigDecimal.ZERO) throw NegativeNumberException()
+        if (this.balance.minus(amount) < BigDecimal.ZERO) throw InsufficientFundsException()
         this.balance = this.balance.minus(amount)
     }
 
