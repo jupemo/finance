@@ -72,5 +72,15 @@ class BankAccountWithdrawTest : BaseTest() {
         assertEquals("0.0", db[0]["balance"])
     }
 
+    @Test
+    fun `withdraw should return 400 status when amount is more than balance`() {
+        val request = HttpRequest.POST("/user/${userId}/bank-account/${bankId}/withdraw", AmountDto("200.0"))
+        val error =
+            assertThrows<HttpClientResponseException> { client.toBlocking().exchange(request, ErrorDto::class.java) }
+
+        assertEquals(400, error.status.code)
+        assertEquals("Insufficient funds", error.message)
+    }
+
 
 }

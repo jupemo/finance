@@ -1,4 +1,6 @@
 package com.jupemo.finance.application.exception
 
-class UserNotFoundException(override val message: String) : Exception() {
+import com.jupemo.finance.exception.NotFoundException
+
+class UserNotFoundException(message: String) : NotFoundException(message) {
 }
