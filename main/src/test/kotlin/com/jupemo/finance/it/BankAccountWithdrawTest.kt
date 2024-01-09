@@ -12,6 +12,7 @@ import io.micronaut.test.extensions.junit5.annotation.MicronautTest
 import jakarta.inject.Inject
 import org.bson.Document
 import org.bson.types.ObjectId
+import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
@@ -70,6 +71,9 @@ class BankAccountWithdrawTest : BaseTest() {
         val userDB = mongoClient.getDatabase("finance").getCollection("user").find(Document("_id", userId)).first()
         val db = userDB?.get("bankAccounts") as List<Map<String, Any>>
         assertEquals("0.0", db[0]["balance"])
+        assertEquals("WITHDRAW", (db[0]["history"] as List<Map<String, Any>>)[0]["action"])
+        assertEquals("100.0", (db[0]["history"] as List<Map<String, Any>>)[0]["amount"])
+        Assertions.assertNotNull((db[0]["history"] as List<Map<String, Any>>)[0]["date"])
     }
 
     @Test

@@ -12,5 +12,6 @@ data class BankAccountDocument(
     val currency: String,
     val type: String,
     val bank: String,
-    val balance: String
+    val balance: String,
+    val history: List<HistoryChangeDocument>? = null
 )

@@ -6,9 +6,8 @@ import java.time.LocalDateTime
 class HistoryChange(
     private val amount: BigDecimal,
     private val action: ActionType,
-) {
-
     private val date: LocalDateTime = LocalDateTime.now()
+) {
 
     fun amount(): BigDecimal {
         return this.amount

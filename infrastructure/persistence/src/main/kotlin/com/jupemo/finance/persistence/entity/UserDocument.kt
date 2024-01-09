@@ -16,6 +16,7 @@ data class UserDocument(
     var name: String,
     var email: String,
     var bankAccounts: List<BankAccountDocument>? = null,
+    var history: List<HistoryChangeDocument>? = null,
     @Version
     var version: Int? = null
 )

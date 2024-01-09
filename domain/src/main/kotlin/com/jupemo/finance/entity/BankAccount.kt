@@ -11,27 +11,26 @@ class BankAccount(
     private val type: BankAccountType,
     private val bank: String,
     private var balance: BigDecimal = BigDecimal.ZERO,
+    private var history: List<HistoryChange> = ArrayList()
 ) {
-
-    private val history: MutableList<HistoryChange> = mutableListOf()
 
     internal fun transferMoney(amount: BigDecimal, to: BankAccount) {
         withdrawMoney(amount)
         depositMoney(amount)
-        history.add(HistoryChange(amount, ActionType.TRANSFER))
+        this.history = history.plus(HistoryChange(amount, ActionType.TRANSFER))
     }
 
     internal fun depositMoney(amount: BigDecimal) {
         if (amount < BigDecimal.ZERO) throw NegativeNumberException()
         this.balance = this.balance.plus(amount)
-        history.add(HistoryChange(amount, ActionType.DEPOSIT))
+        this.history = history.plus(HistoryChange(amount, ActionType.DEPOSIT))
     }
 
     internal fun withdrawMoney(amount: BigDecimal) {
         if (amount < BigDecimal.ZERO) throw NegativeNumberException()
         if (this.balance.minus(amount) < BigDecimal.ZERO) throw InsufficientFundsException()
         this.balance = this.balance.minus(amount)
-        history.add(HistoryChange(amount, ActionType.WITHDRAW))
+        this.history = this.history.plus(HistoryChange(amount, ActionType.WITHDRAW))
     }
 
     fun balance(): BigDecimal {

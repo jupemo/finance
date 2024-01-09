@@ -1,9 +1,8 @@
 package com.jupemo.finance.persistence.mapper
 
-import com.jupemo.finance.entity.BankAccount
-import com.jupemo.finance.entity.BankAccountType
-import com.jupemo.finance.entity.User
+import com.jupemo.finance.entity.*
 import com.jupemo.finance.persistence.entity.BankAccountDocument
+import com.jupemo.finance.persistence.entity.HistoryChangeDocument
 import com.jupemo.finance.persistence.entity.UserDocument
 import jakarta.inject.Singleton
 import org.bson.types.ObjectId
@@ -43,7 +42,10 @@ class UserDocumentMapper {
                 currency = it.currency(),
                 type = it.type().toString(),
                 bank = it.bank(),
-                balance = it.balance().toString()
+                balance = it.balance().toString(),
+                history = it.history()?.map { historyChange ->
+                    toHistoryChangeDocument(historyChange)
+                }
             )
         }
     }
@@ -56,9 +58,28 @@ class UserDocumentMapper {
                 currency = it.currency,
                 type = BankAccountType.valueOf(it.type),
                 bank = it.bank,
-                balance = BigDecimal(it.balance)
+                balance = BigDecimal(it.balance),
+                history = if (it.history != null) it.history.map { historyChangeDocument ->
+                    toHistoryChange(historyChangeDocument)
+                } else emptyList()
             )
         }
+    }
+
+    private fun toHistoryChange(historyChangeDocument: HistoryChangeDocument): HistoryChange {
+        return HistoryChange(
+            amount = BigDecimal(historyChangeDocument.amount),
+            action = ActionType.valueOf(historyChangeDocument.action),
+            date = historyChangeDocument.date
+        )
+    }
+
+    private fun toHistoryChangeDocument(historyChange: HistoryChange): HistoryChangeDocument {
+        return HistoryChangeDocument(
+            amount = historyChange.amount().toString(),
+            action = historyChange.action().toString(),
+            date = historyChange.date()
+        )
     }
 
 }
