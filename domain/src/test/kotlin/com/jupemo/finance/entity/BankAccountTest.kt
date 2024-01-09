@@ -70,6 +70,9 @@ class BankAccountTest {
         bankAccount.depositMoney(BigDecimal(100))
 
         assertEquals(BigDecimal(200), bankAccount.balance())
+        assertEquals(1, bankAccount.history().size)
+        assertEquals(ActionType.DEPOSIT, bankAccount.history()[0].action())
+        assertEquals(BigDecimal(100), bankAccount.history()[0].amount())
     }
 
     @Test
@@ -85,6 +88,9 @@ class BankAccountTest {
         bankAccount.withdrawMoney(BigDecimal(50))
 
         assertEquals(BigDecimal(50), bankAccount.balance())
+        assertEquals(1, bankAccount.history().size)
+        assertEquals(ActionType.WITHDRAW, bankAccount.history()[0].action())
+        assertEquals(BigDecimal(50), bankAccount.history()[0].amount())
     }
 
 }
