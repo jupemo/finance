@@ -21,6 +21,7 @@ dependencies {
     implementation("io.micronaut.validation:micronaut-validation")
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.zalando:logbook-netty:3.7.2")
+    implementation("org.zalando:logbook-core:3.7.2")
 
 
     runtimeOnly("org.yaml:snakeyaml")

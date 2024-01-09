@@ -12,7 +12,7 @@ import org.zalando.logbook.netty.LogbookServerHandler
 
 @Requires(beans = [Logbook::class])
 @Singleton
-class LogbookNettyClientConfig(private val logbook: Logbook) :
+class LogbookNettyServerConfig(private val logbook: Logbook) :
     BeanCreatedEventListener<NettyServerCustomizer.Registry> {
     override fun onCreated(event: BeanCreatedEvent<NettyServerCustomizer.Registry>): NettyServerCustomizer.Registry {
         val registry = event.bean
@@ -22,7 +22,7 @@ class LogbookNettyClientConfig(private val logbook: Logbook) :
 
     private inner class Customizer(private val channel: Channel?) : NettyServerCustomizer {
 
-        override fun specializeForChannel(channel: Channel, role: NettyServerCustomizer.ChannelRole) = Customizer(null)
+        override fun specializeForChannel(channel: Channel, role: NettyServerCustomizer.ChannelRole) = Customizer(channel)
 
         override fun onStreamPipelineBuilt() {
             channel!!.pipeline()

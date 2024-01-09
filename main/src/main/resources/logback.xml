@@ -8,6 +8,10 @@
         </encoder>
     </appender>
 
+    <logger name="org.zalando.logbook" level="TRACE" additivity="false">
+        <appender-ref ref="STDOUT" />
+    </logger>
+
     <root level="info">
         <appender-ref ref="STDOUT" />
     </root>
